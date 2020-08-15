@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:workshop39/injection_container.dart';
 import 'core/constants.dart';
 
-void main() {
+void main() async {
+  await init();
   runApp(Workshop39());
 }
 

@@ -8,4 +8,3 @@ abstract class AppEvent extends Equatable {
 }
 
 class AppOpened extends AppEvent {}
-

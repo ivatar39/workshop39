@@ -14,3 +14,9 @@ class ServerException implements Exception {
     return 'ServerException $statusCode $statusMessage $comment';
   }
 }
+
+class UserNotFoundException implements Exception {}
+
+class CacheException implements Exception {}
+
+class UserAlreadyExistsException implements Exception {}
