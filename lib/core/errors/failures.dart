@@ -1,12 +1,14 @@
 import 'package:equatable/equatable.dart';
 
-abstract class Failure extends Equatable {}
-
-class CommonFailure extends Failure {
+abstract class Failure extends Equatable {
   final String message;
 
-  CommonFailure(this.message);
+  const Failure([this.message]);
 
   @override
   List<Object> get props => [message];
+}
+
+class CommonFailure extends Failure {
+  const CommonFailure(String message) : super(message);
 }

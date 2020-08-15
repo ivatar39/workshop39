@@ -31,18 +31,16 @@ class LoginLocalDataSourceImpl implements LoginLocalDataSource {
 
   @override
   Future<UserModel> login(CredentialsModel credentialsModel) async {
-    try {
-      final data = await secureStorage.read(key: credentialsModel.email);
-      _log.info(data);
-      final user = UserModel.fromJson(jsonDecode(data));
-      if (user == null) {
-        throw UserNotFoundException;
-      }
-      return user;
-    } on Exception catch (e) {
-      _log.warning(e);
-      throw CacheException();
+    _log.info(credentialsModel.email);
+
+    final data = await secureStorage.read(key: credentialsModel.email);
+    _log.info(data);
+    if (data == null) {
+      throw UserNotFoundException();
     }
+    final user = UserModel.fromJson(jsonDecode(data));
+
+    return user;
   }
 
   @override
