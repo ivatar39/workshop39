@@ -1,0 +1,11 @@
+include: package:effective_dart/analysis_options.yaml
+analyzer:
+  exclude:
+    - lib/core/core.navigation/router.gr.dart
+linter:
+  rules:
+    public_member_api_docs: false
+    one_member_abstracts: false
+    omit_local_variable_types: false
+    avoid_print: true
+    avoid_redundant_argument_values: true
