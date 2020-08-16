@@ -21,6 +21,13 @@ FormBlocStep socialStep(RegistrationFormBloc registrationFormBloc) {
             labelText: 'Facebook',
           ),
         ),
+        TextFieldBlocBuilder(
+          textFieldBloc: registrationFormBloc.phoneNumber,
+          keyboardType: TextInputType.phone,
+          decoration: InputDecoration(
+            labelText: 'Номер телефона',
+          ),
+        ),
       ],
     ),
   );

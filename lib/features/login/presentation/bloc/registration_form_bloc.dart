@@ -69,12 +69,12 @@ class RegistrationFormBloc extends FormBloc<String, String> {
         lastName,
         gender,
         birthDate,
-        phoneNumber,
       ],
       step: 1,
     );
     addFieldBlocs(
       fieldBlocs: [
+        phoneNumber,
         vk,
         facebook,
       ],
@@ -85,9 +85,7 @@ class RegistrationFormBloc extends FormBloc<String, String> {
   @override
   void onSubmitting() async {
     print('submit');
-    print(state.currentStep);
     if (state.currentStep == 0) {
-      await Future.delayed(Duration(milliseconds: 500));
       final credentials = Credentials(
         email: email.value,
         password: password.value,
@@ -97,9 +95,10 @@ class RegistrationFormBloc extends FormBloc<String, String> {
       await Future.delayed(Duration(seconds: 1));
 
       failureOrSuccess.fold(
-        (failure) {
+        (failure) async {
           if (failure is UserNotFoundFailure) {
             print('emit success');
+
             emitSuccess();
           } else {
             emitFailure(failureResponse: failure.message);
@@ -110,8 +109,9 @@ class RegistrationFormBloc extends FormBloc<String, String> {
         },
       );
     } else if (state.currentStep == 1) {
+      await Future.delayed(Duration(milliseconds: 500));
       emitSuccess();
-      print('second step');
+    } else if (state.currentStep == 2) {
       final user = User(
         name: firstName.value,
         surname: lastName.value,
@@ -120,17 +120,12 @@ class RegistrationFormBloc extends FormBloc<String, String> {
         phoneNumber: phoneNumber.value,
         birthDate: birthDate.value,
       );
-      print(user);
-
       final failureOrSuccess = await _registerUser(RegisterParams(user: user));
       failureOrSuccess.fold((failure) {
         emitFailure(failureResponse: failure.message);
       }, (success) {
         emitSuccess(successResponse: kSuccess);
       });
-    } else if (state.currentStep == 2) {
-      await Future.delayed(Duration(milliseconds: 500));
-      emitSuccess();
     }
   }
 }

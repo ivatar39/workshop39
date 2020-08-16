@@ -20,14 +20,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => RegistrationFormBloc(
-        registerUser: sl(),
-        login: sl(),
-      ),
+      create: (_) => sl<RegistrationFormBloc>(),
       child: Builder(
         builder: (context) {
-          final formBloc = BlocProvider.of<RegistrationFormBloc>(context);
+          final formBloc = context.bloc<RegistrationFormBloc>();
           return Scaffold(
+            backgroundColor: Colors.lightBlueAccent,
             resizeToAvoidBottomInset: true,
             appBar: AppBar(
               title: Text('Регистрация'),
@@ -36,66 +34,61 @@ class _RegistrationPageState extends State<RegistrationPage> {
               child: FormBlocListener<RegistrationFormBloc, String, String>(
                 onSubmitting: (context, state) {
                   print('submitting');
-                  print(state.lastStep);
                   LoadingDialog.show(context);
                 },
                 onSuccess: (context, state) {
                   LoadingDialog.hide(context);
                   print('success');
-                  print(state.stepCompleted);
-                  print(state.lastStep);
                   if (state.stepCompleted == state.lastStep) {
-                    ExtendedNavigator.root.push(Routes.homePage);
+                    ExtendedNavigator.root.pushAndRemoveUntil(
+                      Routes.homePage,
+                      (route) => false,
+                    );
                   }
                 },
                 onFailure: (context, state) {
                   LoadingDialog.hide(context);
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                    content: Text(state.failureResponse),
+                  ));
                 },
                 formBloc: formBloc,
-                child: StepperFormBlocBuilder<RegistrationFormBloc>(
-                  type: StepperType.horizontal,
-                  onStepTapped: (context, state) {
-                    print('tap');
-                    print(state);
-                  },
-                  physics: ClampingScrollPhysics(),
-                  formBloc: formBloc,
-//                  controlsBuilder: (
-//                    context,
-//                    onStepContinue,
-//                    onStepCancel,
-//                    step,
-//                    formBloc,
-//                  ) {
-//                    return Row(
-//                      children: <Widget>[
-//                        RaisedButton(
-//                          onPressed: () {
-//                            print('tap');
-//                            onStepContinue();
-//                            if (formBloc.state.isLastStep) {
-//                              print('last');
-//                              formBloc.submit();
-//                            }
-//                          },
-//                          color: Theme.of(context).accentColor,
-//                          child: const Text(
-//                            'ДАЛЕЕ',
-//                            style: TextStyle(
-//                              color: Colors.white,
-//                            ),
-//                          ),
-//                        ),
-//                      ],
-//                    );
-//                  },
-                  stepsBuilder: (formBloc) {
-                    return [
-                      credentialsStep(formBloc),
-                      personalStep(formBloc),
-                      socialStep(formBloc),
-                    ];
-                  },
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: StepperFormBlocBuilder<RegistrationFormBloc>(
+                        type: StepperType.horizontal,
+                        physics: ClampingScrollPhysics(),
+                        formBloc: formBloc,
+                        controlsBuilder: (context, onStepContinue, onStepCancel,
+                            step, formBloc) {
+                          return Row(
+                            children: [
+                              RaisedButton(
+                                onPressed: onStepContinue,
+                                child: Text(
+                                  'ДАЛЕЕ',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                color: Theme.of(context).accentColor,
+                              )
+                            ],
+                          );
+                        },
+                        stepsBuilder: (formBloc) {
+                          return [
+                            credentialsStep(formBloc),
+                            personalStep(formBloc),
+                            socialStep(formBloc),
+                          ];
+                        },
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
