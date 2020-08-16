@@ -1,6 +1,8 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:workshop39/core/navigation/bloc/bloc.dart';
+import 'package:workshop39/core/presentation/bloc/app_bloc.dart';
 import 'package:workshop39/features/login/domain/usecases/register_user.dart';
 import 'package:workshop39/features/login/presentation/bloc/registration_form_bloc.dart';
 
@@ -24,6 +26,12 @@ Future<void> init() async {
     ),
   );
   sl.registerSingleton<FlutterSecureStorage>(FlutterSecureStorage());
+
+  /// AppBloc
+  sl.registerSingleton<AppBloc>(AppBloc());
+
+  /// Navigation
+  sl.registerSingleton<NavigationBloc>(NavigationBloc());
 
   /// Login
   sl.registerSingleton<LoginLocalDataSource>(LoginLocalDataSourceImpl(sl()));

@@ -41,7 +41,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   print('success');
                   if (state.stepCompleted == state.lastStep) {
                     ExtendedNavigator.root.pushAndRemoveUntil(
-                      Routes.homePage,
+                      Routes.navigationPage,
                       (route) => false,
                     );
                   }

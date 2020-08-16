@@ -35,8 +35,8 @@ class _LoginPageState extends State<LoginPage> {
               },
               onSuccess: (context, state) {
                 LoadingDialog.hide(context);
-                ExtendedNavigator.root
-                    .pushAndRemoveUntil(Routes.homePage, (route) => false);
+                ExtendedNavigator.root.pushAndRemoveUntil(
+                    Routes.navigationPage, (route) => false);
               },
               onFailure: (context, state) {
                 LoadingDialog.hide(context);

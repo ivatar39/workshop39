@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logging/logging.dart';
 
 import 'core/constants.dart';
 import 'core/navigation/router.gr.dart';
+import 'core/presentation/bloc/app_bloc.dart';
+import 'core/presentation/bloc/app_event.dart';
 import 'injection_container.dart';
 
 void main() async {
@@ -20,7 +23,10 @@ void main() async {
   );
 
   await init();
-  runApp(Workshop39());
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider<AppBloc>(
+        create: (_) => sl<AppBloc>()..add(const AppStarted())),
+  ], child: Workshop39()));
 }
 
 class Workshop39 extends StatefulWidget {
