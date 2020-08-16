@@ -8,6 +8,7 @@ class UserModel {
   final bool isMale;
   final String email;
   final String phoneNumber;
+  final String birthDate;
 
   UserModel({
     @required this.name,
@@ -15,6 +16,7 @@ class UserModel {
     @required this.isMale,
     @required this.email,
     @required this.phoneNumber,
+    @required this.birthDate,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -24,6 +26,7 @@ class UserModel {
       isMale: json['is_male'],
       email: json['email'],
       phoneNumber: json['phone'],
+      birthDate: json['birth_date'],
     );
   }
 
@@ -34,6 +37,7 @@ class UserModel {
       isMale: isMale,
       email: email,
       phoneNumber: phoneNumber,
+      birthDate: DateTime.parse(birthDate),
     );
   }
 
@@ -44,6 +48,7 @@ class UserModel {
       'is_male': isMale,
       'email': email,
       'phone': phoneNumber,
+      'birth_date': birthDate,
     };
   }
 }

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:workshop39/core/constants.dart';
 
 abstract class Failure extends Equatable {
   final String message;
@@ -7,6 +8,10 @@ abstract class Failure extends Equatable {
 
   @override
   List<Object> get props => [message];
+}
+
+class UserNotFoundFailure extends Failure {
+  const UserNotFoundFailure() : super(kUserDoesNotExist);
 }
 
 class CommonFailure extends Failure {

@@ -1,6 +1,8 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:workshop39/features/login/domain/usecases/register_user.dart';
+import 'package:workshop39/features/login/presentation/bloc/registration_form_bloc.dart';
 
 import 'core/util/network_info.dart';
 import 'features/login/data/datasources/login_local_data_source.dart';
@@ -31,4 +33,13 @@ Future<void> init() async {
   sl.registerSingleton(Login(sl()));
 
   sl.registerFactory(() => LoginFormBloc(login: sl()));
+
+  /// Registration
+
+  sl.registerSingleton(RegisterUser(sl()));
+
+  sl.registerFactory(() => RegistrationFormBloc(
+        registerUser: sl(),
+        login: sl(),
+      ));
 }

@@ -9,6 +9,7 @@ class User extends Equatable {
   final bool isMale;
   final String email;
   final String phoneNumber;
+  final DateTime birthDate;
 
   User({
     @required this.name,
@@ -16,6 +17,7 @@ class User extends Equatable {
     @required this.isMale,
     @required this.email,
     @required this.phoneNumber,
+    @required this.birthDate,
   });
 
   UserModel toModel() {
@@ -25,15 +27,23 @@ class User extends Equatable {
       isMale: isMale,
       email: email,
       phoneNumber: phoneNumber,
+      birthDate: birthDate.toString(),
     );
   }
 
   @override
   String toString() {
     return 'User: name: $name, surname: $surname, isMale: $isMale, '
-        'email: $email, phone: $phoneNumber';
+        'email: $email, phone: $phoneNumber, birth: $birthDate';
   }
 
   @override
-  List<Object> get props => [name, surname, isMale, email, phoneNumber];
+  List<Object> get props => [
+        name,
+        surname,
+        isMale,
+        email,
+        phoneNumber,
+        birthDate,
+      ];
 }

@@ -27,7 +27,7 @@ class LoginRepositoryImpl implements LoginRepository {
       return Left(CommonFailure(kSomethingWentWrong));
     } on UserNotFoundException catch (e) {
       _log.warning(e);
-      return Left(CommonFailure(kUserDoesNotExist));
+      return Left(UserNotFoundFailure());
     }
   }
 

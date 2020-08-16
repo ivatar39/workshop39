@@ -31,6 +31,8 @@ class LoginFormBloc extends FormBloc<String, String> {
   }
   @override
   void onSubmitting() async {
+    print('submit');
+    print(state.currentStep);
     final credentials = Credentials(
       email: email.value,
       password: password.value,
@@ -38,12 +40,14 @@ class LoginFormBloc extends FormBloc<String, String> {
     final failureOrSuccess = await _login(LoginParams(credentials));
 
     await Future.delayed(Duration(seconds: 1));
-    failureOrSuccess.fold((failure) {
-      emitFailure(failureResponse: failure.message);
-    }, (user) {
-      emitSuccess(
-        successResponse: kSuccess,
-      );
-    });
+
+    failureOrSuccess.fold(
+      (failure) {
+        emitFailure(failureResponse: failure.message);
+      },
+      (user) {
+        emitSuccess(successResponse: kSuccess);
+      },
+    );
   }
 }
