@@ -10,13 +10,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/login/presentation/pages/login_page.dart';
+import '../../features/login/presentation/pages/registration_page.dart';
 import '../../features/workshops/presentation/pages/home_page.dart';
 
 class Routes {
   static const String loginPage = '/';
+  static const String registrationPage = '/registration-page';
   static const String homePage = '/home-page';
   static const all = <String>{
     loginPage,
+    registrationPage,
     homePage,
   };
 }
@@ -26,6 +29,7 @@ class Router extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(Routes.loginPage, page: LoginPage),
+    RouteDef(Routes.registrationPage, page: RegistrationPage),
     RouteDef(Routes.homePage, page: HomePage),
   ];
   @override
@@ -34,6 +38,12 @@ class Router extends RouterBase {
     LoginPage: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => LoginPage(),
+        settings: data,
+      );
+    },
+    RegistrationPage: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => RegistrationPage(),
         settings: data,
       );
     },

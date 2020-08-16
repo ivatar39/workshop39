@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:workshop39/core/errors/exceptions.dart';
-import 'package:workshop39/features/login/data/models/credentials_model.dart';
-import 'package:workshop39/features/login/data/models/user_model.dart';
+
+import '../../../../core/errors/exceptions.dart';
+import '../models/credentials_model.dart';
+import '../models/user_model.dart';
 
 abstract class LoginLocalDataSource {
   /// Checks [SharedPreferences]

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:equatable/equatable.dart';
-import 'package:workshop39/features/login/data/models/user_model.dart';
+
+import '../../data/models/user_model.dart';
 
 class User extends Equatable {
   final String name;

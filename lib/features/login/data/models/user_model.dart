@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workshop39/features/login/domain/entities/user.dart';
+
+import '../../domain/entities/user.dart';
 
 class UserModel {
   final String name;
