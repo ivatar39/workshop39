@@ -64,6 +64,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             step, formBloc) {
                           return Row(
                             children: [
+                              Visibility(
+                                visible: step != 0,
+                                child: RaisedButton(
+                                  onPressed: onStepCancel,
+                                  child: Text(
+                                    'НАЗАД',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 8.0,
+                              ),
                               RaisedButton(
                                 onPressed: onStepContinue,
                                 child: Text(
@@ -73,7 +89,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   ),
                                 ),
                                 color: Theme.of(context).accentColor,
-                              )
+                              ),
                             ],
                           );
                         },

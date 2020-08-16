@@ -12,8 +12,10 @@ import 'package:flutter/material.dart';
 import '../../features/login/presentation/pages/login_page.dart';
 import '../../features/login/presentation/pages/registration_page.dart';
 import '../../features/profile/presentation/profile_page.dart';
+import '../../features/workshops/domain/entities/workshop.dart';
 import '../../features/workshops/presentation/pages/favorites_page.dart';
 import '../../features/workshops/presentation/pages/home_page.dart';
+import '../../features/workshops/presentation/pages/workshop_page.dart';
 import 'navigation_page.dart';
 
 class Routes {
@@ -23,6 +25,7 @@ class Routes {
   static const String favoritesPage = '/favorites-page';
   static const String profilePage = '/profile-page';
   static const String navigationPage = '/navigation-page';
+  static const String workshopPage = '/workshop-page';
   static const all = <String>{
     loginPage,
     registrationPage,
@@ -30,6 +33,7 @@ class Routes {
     favoritesPage,
     profilePage,
     navigationPage,
+    workshopPage,
   };
 }
 
@@ -43,6 +47,7 @@ class Router extends RouterBase {
     RouteDef(Routes.favoritesPage, page: FavoritesPage),
     RouteDef(Routes.profilePage, page: ProfilePage),
     RouteDef(Routes.navigationPage, page: NavigationPage),
+    RouteDef(Routes.workshopPage, page: WorkshopPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -83,5 +88,28 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    WorkshopPage: (data) {
+      final args = data.getArgs<WorkshopPageArguments>(
+        orElse: () => WorkshopPageArguments(),
+      );
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => WorkshopPage(
+          key: args.key,
+          workshop: args.workshop,
+        ),
+        settings: data,
+      );
+    },
   };
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// WorkshopPage arguments holder class
+class WorkshopPageArguments {
+  final Key key;
+  final Workshop workshop;
+  WorkshopPageArguments({this.key, this.workshop});
 }

@@ -108,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                       InkWell(
                                         child: Text(
-                                          'Зарегестрироваться',
+                                          'Зарегистрироваться',
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyText1

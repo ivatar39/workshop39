@@ -95,7 +95,6 @@ class RegistrationFormBloc extends FormBloc<String, String> {
       failureOrSuccess.fold(
         (failure) async {
           if (failure is UserNotFoundFailure) {
-
             emitSuccess();
           } else {
             emitFailure(failureResponse: failure.message);
@@ -112,7 +111,7 @@ class RegistrationFormBloc extends FormBloc<String, String> {
       final user = User(
         name: firstName.value,
         surname: lastName.value,
-        isMale: gender.value.contains('Мужчина'),
+        isMale: gender?.value?.contains('Мужчина') ?? null,
         email: email.value,
         phoneNumber: phoneNumber.value,
         birthDate: birthDate.value,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/profile/presentation/profile_page.dart';
+import '../../features/workshops/presentation/bloc/bloc.dart';
 import '../../features/workshops/presentation/pages/favorites_page.dart';
 import '../../features/workshops/presentation/pages/home_page.dart';
 import '../../injection_container.dart';
@@ -21,6 +22,9 @@ class _NavigationPageState extends State<NavigationPage> {
       providers: [
         BlocProvider<NavigationBloc>(
           create: (_) => sl<NavigationBloc>()..add(const ToHome()),
+        ),
+        BlocProvider<WorkshopsBloc>(
+          create: (_) => sl<WorkshopsBloc>()..add(const WorkshopsOpened()),
         ),
       ],
       child: Scaffold(
@@ -49,7 +53,7 @@ class _NavigationPageState extends State<NavigationPage> {
                 ),
                 BottomNavigationBarItem(
                   icon: const Icon(Icons.favorite),
-                  title: Text('Заметки'),
+                  title: Text('Избранное'),
                 ),
                 BottomNavigationBarItem(
                   icon: const Icon(Icons.person),

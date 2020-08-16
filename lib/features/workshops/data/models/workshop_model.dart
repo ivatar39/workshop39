@@ -8,14 +8,15 @@ class WorkshopModel {
   final String beginTime;
   final String endTime;
   final Set<String> tags;
+  final String url;
 
-  WorkshopModel
-  ({
+  WorkshopModel({
     @required this.name,
     @required this.description,
     @required this.beginTime,
     @required this.endTime,
     @required this.tags,
+    @required this.url,
   });
 
   Map<String, dynamic> toJson() {
@@ -24,7 +25,8 @@ class WorkshopModel {
       'description': description,
       'begin_time': beginTime,
       'end_time': endTime,
-      'tags':tags
+      'tags': tags,
+      'url': url,
     };
   }
 
@@ -35,6 +37,7 @@ class WorkshopModel {
       beginTime: json['begin_time'],
       endTime: json['end_time'],
       tags: json['tags'],
+      url: json['url'],
     );
   }
 
@@ -45,6 +48,7 @@ class WorkshopModel {
       beginTime: DateTime.parse(beginTime),
       endTime: DateTime.parse(endTime),
       tags: tags,
+      url: url,
     );
   }
 }

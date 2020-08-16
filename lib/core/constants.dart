@@ -11,3 +11,19 @@ const String kUserDoesNotExist = 'Пользователя с такими да�
 const String kAlreadyExists = 'Пользователь с таким email уже существует';
 
 const String kSuccess = 'Успешно';
+
+const Set kAllTags = {'IT', 'Живопись', 'Спорт', 'Интеллект'};
+final Map<String, Color> kColorsTagMap = {
+  'IT': Colors.purple[600],
+  'Живопись': Colors.orange,
+  'Спорт': Colors.lightBlueAccent,
+  'Интеллект': Colors.green,
+  'Микс': Colors.redAccent,
+};
+final Map<String, String> kEmojiMap = {
+  'IT': '💻',
+  'Живопись': '🎨',
+  'Спорт': '⚽',
+  'Интеллект': '♟',
+  'Микс': '📖',
+};

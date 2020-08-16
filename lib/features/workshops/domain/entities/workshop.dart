@@ -9,6 +9,7 @@ class Workshop extends Equatable {
   final DateTime beginTime;
   final DateTime endTime;
   final Set<String> tags;
+  final String url;
 
   Workshop({
     @required this.name,
@@ -16,6 +17,7 @@ class Workshop extends Equatable {
     @required this.beginTime,
     @required this.endTime,
     @required this.tags,
+    @required this.url,
   });
 
   WorkshopModel toModel() {
@@ -25,15 +27,16 @@ class Workshop extends Equatable {
       beginTime: beginTime.toString(),
       endTime: endTime.toString(),
       tags: tags,
+      url: url,
     );
   }
 
   @override
-  List<Object> get props => [name, description, beginTime, endTime, tags];
+  List<Object> get props => [name, description, beginTime, endTime, tags, url];
 
   @override
   String toString() {
     return 'Workshop: $name, desc: $description, '
-        'begin: $beginTime, end: $endTime, tags: $tags';
+        'begin: $beginTime, end: $endTime, tags: $tags, url: $url';
   }
 }

@@ -12,6 +12,11 @@ import 'features/login/domain/usecases/login.dart';
 import 'features/login/domain/usecases/register_user.dart';
 import 'features/login/presentation/bloc/login_form_bloc.dart';
 import 'features/login/presentation/bloc/registration_form_bloc.dart';
+import 'features/workshops/data/datasources/workshops_local_data_source.dart';
+import 'features/workshops/data/repositories/workshops_repository_impl.dart';
+import 'features/workshops/domain/repositories/workshops_repository.dart';
+import 'features/workshops/domain/usecases/get_workshops.dart';
+import 'features/workshops/presentation/bloc/bloc.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -50,4 +55,14 @@ Future<void> init() async {
         registerUser: sl(),
         login: sl(),
       ));
+
+  /// Workshops
+  sl.registerSingleton<WorkshopsLocalDataSource>(
+      WorkshopsLocalDataSourceImpl());
+
+  sl.registerSingleton<WorkshopsRepository>(WorkshopsRepositoryImpl(sl()));
+
+  sl.registerSingleton(GetWorkshops(sl()));
+
+  sl.registerFactory(() => WorkshopsBloc(getWorkshops: sl()));
 }
