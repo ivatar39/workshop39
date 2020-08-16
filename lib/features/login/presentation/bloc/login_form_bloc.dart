@@ -31,8 +31,6 @@ class LoginFormBloc extends FormBloc<String, String> {
   }
   @override
   void onSubmitting() async {
-    print('submit');
-    print(state.currentStep);
     final credentials = Credentials(
       email: email.value,
       password: password.value,

@@ -61,7 +61,6 @@ class RegistrationFormBloc extends FormBloc<String, String> {
         email,
         password,
       ],
-      step: 0,
     );
     addFieldBlocs(
       fieldBlocs: [
@@ -84,7 +83,6 @@ class RegistrationFormBloc extends FormBloc<String, String> {
 
   @override
   void onSubmitting() async {
-    print('submit');
     if (state.currentStep == 0) {
       final credentials = Credentials(
         email: email.value,
@@ -97,7 +95,6 @@ class RegistrationFormBloc extends FormBloc<String, String> {
       failureOrSuccess.fold(
         (failure) async {
           if (failure is UserNotFoundFailure) {
-            print('emit success');
 
             emitSuccess();
           } else {

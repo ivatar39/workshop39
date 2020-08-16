@@ -9,8 +9,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-      child: Text('Мне понравилось'),
-    ));
+      body: Center(
+        child: Text('Мне понравилось'),
+      ),
+    );
   }
 }

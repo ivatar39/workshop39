@@ -2,14 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
-import 'package:workshop39/core/navigation/router.gr.dart';
-import 'package:workshop39/features/login/presentation/widgets/loading_dialog.dart';
-import 'package:workshop39/features/login/presentation/widgets/regiser_personal_step.dart';
-import 'package:workshop39/features/login/presentation/widgets/register_credentials_step.dart';
-import 'package:workshop39/features/login/presentation/widgets/register_social_step.dart';
 
+import '../../../../core/navigation/router.gr.dart';
 import '../../../../injection_container.dart';
 import '../bloc/registration_form_bloc.dart';
+import '../widgets/loading_dialog.dart';
+import '../widgets/regiser_personal_step.dart';
+import '../widgets/register_credentials_step.dart';
+import '../widgets/register_social_step.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -33,12 +33,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
             body: SafeArea(
               child: FormBlocListener<RegistrationFormBloc, String, String>(
                 onSubmitting: (context, state) {
-                  print('submitting');
                   LoadingDialog.show(context);
                 },
                 onSuccess: (context, state) {
                   LoadingDialog.hide(context);
-                  print('success');
                   if (state.stepCompleted == state.lastStep) {
                     ExtendedNavigator.root.pushAndRemoveUntil(
                       Routes.navigationPage,

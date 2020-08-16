@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:workshop39/core/constants.dart';
+
+import '../constants.dart';
 
 abstract class Failure extends Equatable {
   final String message;

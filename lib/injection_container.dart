@@ -1,17 +1,17 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:workshop39/core/navigation/bloc/bloc.dart';
-import 'package:workshop39/core/presentation/bloc/app_bloc.dart';
-import 'package:workshop39/features/login/domain/usecases/register_user.dart';
-import 'package:workshop39/features/login/presentation/bloc/registration_form_bloc.dart';
 
+import 'core/navigation/bloc/bloc.dart';
+import 'core/presentation/bloc/app_bloc.dart';
 import 'core/util/network_info.dart';
 import 'features/login/data/datasources/login_local_data_source.dart';
 import 'features/login/data/repositories/login_repository_impl.dart';
 import 'features/login/domain/repositories/login_repository.dart';
 import 'features/login/domain/usecases/login.dart';
+import 'features/login/domain/usecases/register_user.dart';
 import 'features/login/presentation/bloc/login_form_bloc.dart';
+import 'features/login/presentation/bloc/registration_form_bloc.dart';
 
 final GetIt sl = GetIt.instance;
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workshop39/features/profile/presentation/profile_page.dart';
-import 'package:workshop39/features/workshops/presentation/pages/favorites_page.dart';
-import 'package:workshop39/features/workshops/presentation/pages/home_page.dart';
 
+import '../../features/profile/presentation/profile_page.dart';
+import '../../features/workshops/presentation/pages/favorites_page.dart';
+import '../../features/workshops/presentation/pages/home_page.dart';
 import '../../injection_container.dart';
 import 'bloc/navigation_bloc.dart';
 import 'bloc/navigation_event.dart';

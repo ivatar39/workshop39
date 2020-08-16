@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:workshop39/core/navigation/bloc/bloc.dart';
+
+import 'bloc.dart';
 
 class NavigationBloc extends Bloc<NavigationEvent, NavigationState> {
   NavigationBloc() : super(const NavigationInitial());
