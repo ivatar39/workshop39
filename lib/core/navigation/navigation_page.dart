@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/profile/presentation/profile_page.dart';
-import '../../features/workshops/presentation/bloc/bloc.dart';
+import '../../features/workshops/presentation/bloc/workshops/bloc.dart';
 import '../../features/workshops/presentation/pages/favorites_page.dart';
 import '../../features/workshops/presentation/pages/home_page.dart';
 import '../../injection_container.dart';

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../domain/entities/workshop.dart';
+import '../../../domain/entities/workshop.dart';
 
 abstract class WorkshopsState extends Equatable {
   const WorkshopsState();

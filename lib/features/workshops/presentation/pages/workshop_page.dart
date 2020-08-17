@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:workshop39/core/constants.dart';
-import 'package:workshop39/features/workshops/domain/entities/workshop.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:toast/toast.dart';
+import 'package:workshop39/features/workshops/presentation/bloc/favorites/bloc.dart';
+
+import '../../domain/entities/workshop.dart';
+import '../widgets/workshops_util.dart';
 
 class WorkshopPage extends StatelessWidget {
   final Workshop workshop;
@@ -9,24 +13,69 @@ class WorkshopPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color getColor(Set tags) {
-      if (tags.length > 1) {
-        return kColorsTagMap.values.last;
-      } else {
-        return kColorsTagMap[tags.first];
-      }
-    }
+    final mainColor = getColor(workshop.tags);
 
     return Scaffold(
-      appBar: AppBar(),
-      body: Hero(
-        tag: workshop.name,
-        child: Container(
-          child: Card(
-            color: getColor(workshop.tags),
-            child: Text(workshop.name),
-          ),
+      appBar: AppBar(
+        backgroundColor: mainColor,
+        title: Text(workshop.name),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Text(
+              workshop.description,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.calendar_today),
+              title: Text(
+                '${workshop.beginTime.toLocal().month}.'
+                '${workshop.beginTime.toLocal().day}.'
+                '${workshop.beginTime.toLocal().year} ',
+              ),
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.timelapse),
+              title: Text(''
+                  '${workshop.beginTime.toLocal().hour}:'
+                  '${workshop.beginTime.toLocal().minute} —'
+                  ' ${workshop.endTime.toLocal().hour}:'
+                  '${workshop.endTime.toLocal().minute}'),
+            ),
+            Divider(),
+            Expanded(child: SizedBox()),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: RaisedButton(
+                  elevation: 8,
+                  onPressed: () {},
+                  child: Text(
+                    'ОТПРАВИТЬ ЗАЯВКУ',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: mainColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: mainColor,
+        tooltip: 'В избранное',
+        child: Icon(Icons.favorite),
+        onPressed: () {
+          Toast.show('Добавлено в избранное', context);
+          BlocProvider.of<FavoritesBloc>(context).add(FavoritesAdded(workshop));
+        },
       ),
     );
   }

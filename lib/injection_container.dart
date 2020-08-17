@@ -1,6 +1,7 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/navigation/bloc/bloc.dart';
 import 'core/presentation/bloc/app_bloc.dart';
@@ -15,8 +16,11 @@ import 'features/login/presentation/bloc/registration_form_bloc.dart';
 import 'features/workshops/data/datasources/workshops_local_data_source.dart';
 import 'features/workshops/data/repositories/workshops_repository_impl.dart';
 import 'features/workshops/domain/repositories/workshops_repository.dart';
+import 'features/workshops/domain/usecases/get_favorite_workshops.dart';
 import 'features/workshops/domain/usecases/get_workshops.dart';
-import 'features/workshops/presentation/bloc/bloc.dart';
+import 'features/workshops/domain/usecases/set_favorite_workshop.dart';
+import 'features/workshops/presentation/bloc/favorites/bloc.dart';
+import 'features/workshops/presentation/bloc/workshops/bloc.dart';
 
 final GetIt sl = GetIt.instance;
 
@@ -30,6 +34,9 @@ Future<void> init() async {
       sl(),
     ),
   );
+  final prefs = await SharedPreferences.getInstance();
+  sl.registerSingleton(prefs);
+
   sl.registerSingleton<FlutterSecureStorage>(FlutterSecureStorage());
 
   /// AppBloc
@@ -58,11 +65,18 @@ Future<void> init() async {
 
   /// Workshops
   sl.registerSingleton<WorkshopsLocalDataSource>(
-      WorkshopsLocalDataSourceImpl());
+      WorkshopsLocalDataSourceImpl(sl()));
 
   sl.registerSingleton<WorkshopsRepository>(WorkshopsRepositoryImpl(sl()));
 
   sl.registerSingleton(GetWorkshops(sl()));
+  sl.registerSingleton(GetFavoriteWorkshops(sl()));
+  sl.registerSingleton(SetFavoriteWorkshop(sl()));
 
   sl.registerFactory(() => WorkshopsBloc(getWorkshops: sl()));
+
+  sl.registerFactory(() => FavoritesBloc(
+        getFavoriteWorkshops: sl(),
+        setFavoriteWorkshop: sl(),
+      ));
 }

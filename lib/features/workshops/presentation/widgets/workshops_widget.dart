@@ -47,7 +47,7 @@ class _WorkshopsWidgetState extends State<WorkshopsWidget> {
                     children: [
                       AutoSizeText(
                         '${getEmojiPrefix(workshop.tags)}${workshop.name}',
-                        style: Theme.of(context).textTheme.headline4.copyWith(
+                        style: Theme.of(context).textTheme.headline5.copyWith(
                               color: Colors.white,
                             ),
                         maxLines: 3,

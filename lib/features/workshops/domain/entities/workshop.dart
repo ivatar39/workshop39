@@ -8,7 +8,7 @@ class Workshop extends Equatable {
   final String description;
   final DateTime beginTime;
   final DateTime endTime;
-  final Set<String> tags;
+  final List tags;
   final String url;
 
   Workshop({
@@ -26,7 +26,7 @@ class Workshop extends Equatable {
       description: description,
       beginTime: beginTime.toString(),
       endTime: endTime.toString(),
-      tags: tags,
+      tags: tags.toList(),
       url: url,
     );
   }

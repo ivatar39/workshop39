@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:logging/logging.dart';
+import 'package:workshop39/core/errors/exceptions.dart';
 
 import '../../../../core/errors/failures.dart';
 import '../../domain/entities/workshop.dart';
@@ -25,5 +26,29 @@ class WorkshopsRepositoryImpl implements WorkshopsRepository {
       _log.warning(e);
       return Left(CommonFailure(e.toString()));
     }
+  }
+
+  @override
+  Future<Either<Failure, List<Workshop>>> getFavoriteWorkshops() async {
+    try {
+      final data = await localDataSource.getFavoriteWorkshops();
+
+      final List<Workshop> favoriteWorkshops = [];
+      for (final model in data) {
+        final workshop = model.toEntity();
+        favoriteWorkshops.add(workshop);
+      }
+      return Right(favoriteWorkshops);
+    } on CacheException catch (e) {
+      _log.warning(e);
+      return Left(CommonFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> setFavoriteWorkshop(Workshop workshop) async {
+
+        await localDataSource.setFavoriteWorkshop(workshop.toModel());
+    return Right({});
   }
 }

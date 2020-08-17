@@ -7,7 +7,7 @@ class WorkshopModel {
   final String description;
   final String beginTime;
   final String endTime;
-  final Set<String> tags;
+  final List tags;
   final String url;
 
   WorkshopModel({
@@ -25,7 +25,7 @@ class WorkshopModel {
       'description': description,
       'begin_time': beginTime,
       'end_time': endTime,
-      'tags': tags,
+      'tags': tags.toList(),
       'url': url,
     };
   }

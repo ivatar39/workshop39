@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants.dart';
 
-Color getColor(Set tags) {
+Color getColor(List tags) {
   if (tags.length > 1) {
     return kColorsTagMap.values.last;
   } else {
@@ -10,7 +10,7 @@ Color getColor(Set tags) {
   }
 }
 
-String getEmojiPrefix(Set tags) {
+String getEmojiPrefix(List tags) {
   if (tags.length > 1) {
     return kEmojiMap.values.last;
   } else {

@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/usecase.dart';
-import '../../domain/usecases/get_workshops.dart';
+import '../../../../../core/usecase.dart';
+import '../../../domain/usecases/get_workshops.dart';
 import 'bloc.dart';
 
 class WorkshopsBloc extends Bloc<WorkshopsEvent, WorkshopsState> {
