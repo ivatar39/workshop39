@@ -47,8 +47,7 @@ class WorkshopsRepositoryImpl implements WorkshopsRepository {
 
   @override
   Future<Either<Failure, void>> setFavoriteWorkshop(Workshop workshop) async {
-
-        await localDataSource.setFavoriteWorkshop(workshop.toModel());
+    await localDataSource.setFavoriteWorkshop(workshop.toModel());
     return Right({});
   }
 }
